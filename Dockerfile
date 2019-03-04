@@ -30,14 +30,14 @@ RUN cd rose-develop && ./build
 
 # build ROSE
 WORKDIR /usr/src/rose-build
-RUN CXXFLAGS='-g -rdynamic -Wall -Wno-unused-local-typedefs -Wno-attributes' ../rose-develop/configure --enable-assertion-behavior=abort --prefix=/usr/rose --with-CFLAGS=-fPIC --with-CXXFLAGS=-fPIC --with-C_OPTIMIZE=-O0 --with-CXX_OPTIMIZE=-O0 --with-C_DEBUG='-g -rdynamic' --with-CXX_DEBUG='-g -rdynamic' --with-C_WARNINGS='-Wall -Wno-unused-local-typedefs -Wno-attributes' --with-CXX_WARNINGS='-Wall -Wno-unused-local-typedefs -Wno-attributes' --with-ROSE_LONG_MAKE_CHECK_RULE=yes --with-boost=/usr/rose --with-gfortran=/usr/bin/gfortran-4.9 --enable-languages=c,c++,fortran --with-java=/opt/jdk --enable-projects-directory --with-doxygen --without-sqlite3 --without-libreadline --without-magic --without-yaml --with-dlib='/home/demo/opt/dlib/18.18' --without-wt --without-yices --without-pch --enable-rosehpct --without-haskell --enable-edg_version=4.12
+RUN ../rose-develop/configure --prefix=/usr/rose --with-C_OPTIMIZE=-O0 --with-CXX_OPTIMIZE=-O0 --with-C_DEBUG='-g' --with-CXX_DEBUG='-g' --with-boost=/usr/rose --with-gfortran=/usr/bin/gfortran-4.9 --enable-languages=c,c++,fortran --with-java=/opt/jdk --enable-projects-directory --enable-edg_version=4.12
 # feel free to change the -j value
 RUN make core -j4
 RUN make install-core -j4
 
 # strip symbols from the binaries to reduce size
 RUN apt-get update && apt-get install -y binutils && rm -rf /var/lib/apt/lists/*
-RUN strip /usr/rose/bin/* /usr/rose/lib/* || true
+#RUN strip /usr/rose/bin/* /usr/rose/lib/* || true
 
 # STAGE 2: build the image
 FROM ubuntu:xenial as rose
