@@ -36,7 +36,7 @@ RUN make core -j4
 RUN make install-core -j4
 
 # strip symbols from the binaries to reduce size
-RUN apt-get update && apt-get install -y binutils && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y binutils && rm -rf /var/lib/apt/lists/*
 #RUN strip /usr/rose/bin/* /usr/rose/lib/* || true
 
 # STAGE 2: build the image
@@ -60,3 +60,10 @@ RUN ldconfig
 # add other packages
 RUN apt-get update
 RUN apt-get install -y gcc-4.9 g++-4.9 gfortran-4.9
+
+# use gcc 4.9 in rose package
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100
+RUN update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-4.9 100
+
+WORKDIR /root
