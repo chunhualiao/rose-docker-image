@@ -19,7 +19,7 @@ This step might take about two hours, depending on your machine configuration.
 The easiest way is to use it from shell:
 
 ```
-sudo docker run rose sh
+sudo docker run  --rm -it rose sh
 ```
 
 Or you can run ROSE utils directly but do not forget to [mount](https://docs.docker.com/storage/volumes/) local paths into container.
