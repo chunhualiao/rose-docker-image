@@ -12,7 +12,7 @@ You can build the image using Dockerfile from the project root. For example, wit
 sudo docker build -t rose .
 ```
 
-This step might take a lot of time.
+This step might take about two hours, depending on your machine configuration.
 
 ## Using
 
