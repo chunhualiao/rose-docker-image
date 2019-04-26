@@ -21,9 +21,6 @@ WORKDIR /usr/src/boost_1_67_0
 RUN ./bootstrap.sh --prefix=/usr/rose --with-libraries=chrono,date_time,filesystem,iostreams,program_options,random,regex,serialization,signals,system,thread,wave || cat ./bootstrap.log
 RUN ./b2 -sNO_BZIP2=1 install
 
-# add JDK which is required for ROSE building
-ADD jdk/ /opt/jdk
-
 # prepare ROSE source code
 WORKDIR /usr/src
 RUN git clone https://github.com/rose-compiler/rose.git
@@ -31,7 +28,7 @@ RUN cd rose && ./build
 
 # build ROSE
 WORKDIR /usr/src/rose-build
-RUN CC=gcc-7 CXX=g++-7 CXXFLAGS= ../rose/configure --prefix=/usr/rose --oldincludedir=/usr/include --with-C_OPTIMIZE=-O0 --with-CXX_OPTIMIZE=-O0 --with-C_DEBUG='-g' --with-CXX_DEBUG='-g' --with-boost=/usr/rose --with-boost-libdir=/usr/rose/lib --with-gfortran=/usr/bin/gfortran-7 --enable-languages=c,c++,fortran --enable-projects-directory --enable-edg_version=4.12
+RUN CC=gcc-7 CXX=g++-7 CXXFLAGS= ../rose/configure --prefix=/usr/rose --oldincludedir=/usr/include --with-C_OPTIMIZE=-O0 --with-CXX_OPTIMIZE=-O0 --with-C_DEBUG='-g' --with-CXX_DEBUG='-g' --with-boost=/usr/rose --with-boost-libdir=/usr/rose/lib --with-gfortran=/usr/bin/gfortran-7 --enable-languages=c,c++,fortran --enable-projects-directory --enable-edg_version=5.0
 # feel free to change the -j value
 RUN make core -j4
 RUN make install-core -j4
@@ -62,12 +59,14 @@ RUN ldconfig
 RUN apt-get update
 RUN apt-get install -y gcc-7 g++-7 gfortran-7
 
-# use gcc 4.9 in rose package
+# use gcc 7 in rose package
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 100
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 100
 RUN update-alternatives --install /usr/bin/gfortran gfortran /usr/bin/gfortran-7 100
 
 RUN apt-get update
 RUN apt-get install libicu60
+
+RUN sed -i '1s/^/#define __builtin_bswap16 __bswap_constant_16\n/' /usr/rose/include/edg/g++-7_HEADERS/hdrs7/bits/byteswap.h
 
 WORKDIR /root
