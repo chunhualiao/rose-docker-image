@@ -40,3 +40,25 @@ sudo docker push username/rose
 ```
 
 Package username/rose will be available for the other registry users.
+
+## How to download an image
+
+The easiest way is to use rose with docker is just download an image ready. You can easily access an image using the following command:
+
+```
+docker pull gleisonsdm/rose:latest
+```
+
+## Using the image
+
+The easiest way is to use it from shell:
+
+```
+sudo docker run --rm -it -v $(pwd):/root gleisonsdm/rose sh
+```
+
+Or you can run ROSE utils directly but do not forget to [mount](https://docs.docker.com/storage/volumes/) local paths into container. For instance the command below runs container with ROSE, mounts current working directory to container's /root and executes indetityTranslator tool on main.cpp. Resulting files will be stored in current working directory, container will be deleted due to --rm option.
+
+```
+sudo docker run --rm -it -v $(pwd):/root gleisonsdm/rose identityTranslator -c main.cpp
+
