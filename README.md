@@ -4,6 +4,20 @@
 
 Before the building you should clone this repository and have Docker installed on your computer.
 
+Docker intallation instructions:
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+     
+sudo apt install docker-ce
+# check if docker service is started
+sudo systemctl status docker
+```
+
 ## Building
 
 You can build the image using Dockerfile from the project root. For example, with command below.
