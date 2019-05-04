@@ -57,10 +57,10 @@ Package username/rose will be available for the other registry users.
 
 ## How to download an image
 
-The easiest way is to use rose with docker is just download an image ready. You can easily access an image using the following command:
+The easiest way is to use rose with docker is just download an image which is ready to use (built by Gleison). You can easily access an image using the following command:
 
 ```
-docker pull gleisonsdm/rose:latest
+sudo docker pull gleisonsdm/rose:latest
 ```
 
 ## Using the image
