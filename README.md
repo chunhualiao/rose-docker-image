@@ -59,7 +59,7 @@ Package username/rose will be available for the other registry users.
 
 The easiest way is to use rose with docker is just download an image which is ready to use (built by Gleison). You can easily access an image using the following command:
 
-```
+```sh
 sudo docker pull gleisonsdm/rose:latest
 ```
 
@@ -69,6 +69,30 @@ The easiest way to use the image is running bash commands directly. You can find
 
 ```sh
 sudo docker run --rm -it -v $(pwd):/root gleisonsdm/rose:latest ls /usr/rose/bin
+```
+
+Then, the expected output is:
+
+```sh
+ArrayProcessor			  interproceduralCFG
+DataFaultToleranceTransformation  libtool
+KeepGoingTranslator		  livenessAnalysis
+astCopyReplTest			  loopProcessor
+astRewriteExample1		  mangledNameDumper
+autoPar				  measureTool
+autoTuning			  moveDeclarationToInnermostScope
+buildCallGraph			  outline
+codeInstrumentor		  pdfGenerator
+compassEmptyMain		  preprocessingInfoDumper
+compassMain			  qualifiedNameDumper
+compassVerifier			  rajaChecker
+defaultTranslator		  rose-config
+defuseAnalysis			  roseupcc
+dotGenerator			  sampleCompassSubset
+dotGeneratorWholeASTGraph	  summarizeSignatures
+extractMPISkeleton		  typeforge
+generateSignatures		  virtualCFG
+identityTranslator
 ```
 
 The next step is check if your docker image is working correctly, you can run identityTranslator in a program as a test. We suggest you to run a hello world, as the code provided below:
