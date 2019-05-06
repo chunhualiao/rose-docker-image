@@ -65,14 +65,31 @@ sudo docker pull gleisonsdm/rose:latest
 
 ## Using the image
 
-The easiest way is to use it from shell:
+The easiest way to use the image is running bash commands directly. You can find the binaries at "/usr/rose/bin/" ready to run. Please, check this using the follow command line:
 
-```
-sudo docker run --rm -it -v $(pwd):/root gleisonsdm/rose sh
+```sh
+sudo docker run --rm -it -v $(pwd):/root gleisonsdm/rose:latest ls /usr/rose/bin
 ```
 
-Or you can run ROSE utils directly but do not forget to [mount](https://docs.docker.com/storage/volumes/) local paths into container. For instance the command below runs container with ROSE, mounts current working directory to container's /root and executes indetityTranslator tool on main.cpp. Resulting files will be stored in current working directory, container will be deleted due to --rm option.
+The next step is check if your docker image is working correctly, you can run identityTranslator in a program as a test. We suggest you to run a hello world, as the code provided below:
 
+```cpp
+#include <iostream>
+
+int main() {
+  std::cout << "Hello World!\n";
+  return 0;
+}
 ```
+
+After save this code in a file named "main.cpp", you are able to run ROSE utils directly, but do not forget to [mount](https://docs.docker.com/storage/volumes/) local paths into container. For instance the command below runs container with ROSE, mounts current working directory to container's /root and executes indetityTranslator tool on main.cpp. Resulting files will be stored in current working directory, container will be deleted due to --rm option.
+
+```sh
 sudo docker run --rm -it -v $(pwd):/root gleisonsdm/rose identityTranslator -c main.cpp
+```
+
+In the end, your current directory contains new files, as listed bellow:
+* main.o
+* main.ti
+* rose_main.cpp
 
