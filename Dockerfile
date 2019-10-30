@@ -1,4 +1,4 @@
-# STAGE 1: build ROSE
+# STAGE 1: build ROSE, Ubuntu 18.10 Cosmic , we actually want Ubuntu 18.04 LTS
 FROM ubuntu:cosmic as build
 
 # install build dependencies
